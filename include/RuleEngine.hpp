@@ -11,11 +11,11 @@
 
 enum OP_TYPE
 {
-	OP_NONE,
-	OP_APPEND,
-	OP_INSERT,
-	OP_REPLACE,
-	OP_REVERSE,
+    OP_NONE,
+    OP_APPEND,
+    OP_INSERT,
+    OP_REPLACE,
+    OP_REVERSE,
 };
 
 /**
@@ -26,40 +26,37 @@ enum OP_TYPE
 class Rule
 {
 public:
-	Rule() = delete;
-	Rule(int condition, const std::string& tag, const std::string& opType, std::string referenceToken = "");
-	
-	bool valid_condition(int number, std::vector<std::string>& vec) const;
+    Rule() = delete;
+    Rule(int condition, const std::string &tag, const std::string &opType, std::string referenceToken = "");
 
-	static OP_TYPE parse_op_type(const std::string& str);
+    bool valid_condition(int number, std::vector<std::string> &vec) const;
+
+    static OP_TYPE parse_op_type(const std::string &str);
 
 private:
-	int m_condition;
-	std::string m_tag;
-	int m_opType;
-	std::string m_token;
+    int m_condition;
+    std::string m_tag;
+    int m_opType;
+    std::string m_token;
 
-	static const std::unordered_map<std::string, OP_TYPE> op_map;
+    static const std::unordered_map<std::string, OP_TYPE> op_map;
 };
 
 /**
  * @brief Manages and applies a set of Rule objects to evaluate integer input.
  */
-class RuleSet 
+class RuleSet
 {
 public:
-	RuleSet() {}
-	
-	std::string Evaluate(int number);
-	inline void Add(int condition, const std::string& tag, const std::string& opType, const std::string& token = "") 
-    { 
-        m_rules.push_back(std::make_unique<Rule>(condition, tag, opType, token)); 
+    RuleSet() {}
+
+    std::string Evaluate(int number);
+    inline void Add(int condition, const std::string &tag, const std::string &opType, const std::string &token = "")
+    {
+        m_rules.push_back(std::make_unique<Rule>(condition, tag, opType, token));
     }
-	
+
 private:
-	std::vector<std::unique_ptr<Rule>> m_rules;
-	std::vector<std::string> m_result;
+    std::vector<std::unique_ptr<Rule>> m_rules;
+    std::vector<std::string> m_result;
 };
-
-
-

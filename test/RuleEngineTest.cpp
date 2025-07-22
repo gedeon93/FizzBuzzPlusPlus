@@ -11,7 +11,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
-#include "../include/RuleEngine.hpp"  // Adjust path as needed
+#include "../include/RuleEngine.hpp" // Adjust path as needed
 
 void test_valid_condition_append()
 {

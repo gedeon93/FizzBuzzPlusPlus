@@ -1,6 +1,6 @@
 /*
-* FizzBuzz++: An advanced and extensible FizzBuzz exercise.
-*/
+ * FizzBuzz++: An advanced and extensible FizzBuzz exercise.
+ */
 
 #include <iostream>
 
@@ -13,16 +13,16 @@
 using json = nlohmann::json;
 using namespace std;
 
-bool LoadConfig(const std::string& configFile, RuleSet& ruleSet);
+bool LoadConfig(const std::string &configFile, RuleSet &ruleSet);
 
-int main(int argc, char* argv[]) 
+int main(int argc, char *argv[])
 {
     std::string appMode = "default";
     unsigned int start_number = 1;
-	unsigned int end_number = 100;
+    unsigned int end_number = 100;
     std::string configFile;
 
-    if (argc >= 2) 
+    if (argc >= 2)
         appMode = argv[1];
 
     if (appMode == "range" && argc == 4)
@@ -52,8 +52,8 @@ int main(int argc, char* argv[])
         std::cerr << "Invalid range provided via input.\n";
         return 1;
     }
-	
-	RuleSet ruleSet;
+
+    RuleSet ruleSet;
 
     // User-specified rule set.
     if (appMode == "config")
@@ -71,13 +71,13 @@ int main(int argc, char* argv[])
         ruleSet.Add(13, "Fezz", "insert", "B");
         ruleSet.Add(17, "", "reverse");
     }
-	
-	for (int i = start_number; i <= end_number; ++i)
-	{
-		std::cout << ruleSet.Evaluate(i) << std::endl;
-	}
 
-	return 0;
+    for (int i = start_number; i <= end_number; ++i)
+    {
+        std::cout << ruleSet.Evaluate(i) << std::endl;
+    }
+
+    return 0;
 }
 
 /**
@@ -87,10 +87,11 @@ int main(int argc, char* argv[])
  * @param out Reference to a json object to populate.
  * @return true if the file was successfully opened and parsed; false otherwise.
  */
-bool LoadConfig(const std::string& configFile, RuleSet& ruleSet)
+bool LoadConfig(const std::string &configFile, RuleSet &ruleSet)
 {
     std::ifstream file(configFile);
-    if (!file.is_open()) {
+    if (!file.is_open())
+    {
         std::cerr << "Error: Failed to open file: " << configFile << std::endl;
         std::cerr << "Working directory: " << std::filesystem::current_path() << std::endl;
         return false;
@@ -101,13 +102,13 @@ bool LoadConfig(const std::string& configFile, RuleSet& ruleSet)
     {
         rules = json::parse(file);
     }
-    catch (const std::exception& e)
+    catch (const std::exception &e)
     {
         std::cerr << "JSON parse error: " << e.what() << std::endl;
         return false;
     }
 
-    for (const auto& rule : rules)
+    for (const auto &rule : rules)
     {
         int condition = rule["condition"];
         std::string tag = rule["tag"];
