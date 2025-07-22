@@ -1,0 +1,21 @@
+# Binaries and Obj Files
+*.obj
+*.o
+*.dll
+*.lib
+*.a
+*.so
+*.out
+*.exe
+
+# Build
+bin/
+
+# VS Code
+.vscode/
+
+# MacOS System
+.DS_Store
+
+# Tests
+testsuite
